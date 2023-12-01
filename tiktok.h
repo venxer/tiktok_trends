@@ -5,6 +5,7 @@
 #include <unordered_map>
 #include <queue>
 #include <fstream>
+#include <regex>
 
 class TikTok
 {
@@ -39,11 +40,13 @@ class TikTok
         unsigned long long getViewCount()    {return viewCount;   };
 
         friend void printTopHashtags(std::ofstream &out_str, 
-                      const std::vector<std::string> &top10Hashtags,
-                      const std::unordered_map<std::string, std::pair<std::priority_queue<TikTok>, unsigned long long> > &map);
+                                     const std::vector<std::string> &top10Hashtags,
+                                     const std::unordered_map<std::string, std::pair<std::priority_queue<TikTok>, 
+                                                                                     unsigned long long> > &map);
         friend void printTopSounds(std::ofstream &out_str, 
-                    const std::vector<std::string> &top10Sounds,
-                    const std::unordered_map<std::string, std::pair<std::priority_queue<TikTok>, unsigned long long> > &map);
+                                   const std::vector<std::string> &top10Sounds,
+                                   const std::unordered_map<std::string, std::pair<std::priority_queue<TikTok>, 
+                                                                                   unsigned long long> > &map);
         friend bool operator<(const TikTok &a, const TikTok &b);
 };
 
@@ -53,7 +56,6 @@ class compareHashtag
         bool operator()(const std::pair<std::string, std::pair<unsigned long long, unsigned long long> > &a, 
                         const std::pair<std::string, std::pair<unsigned long long, unsigned long long> > &b) const;
 };
-
 class compareSound
 {
     public:
@@ -61,12 +63,18 @@ class compareSound
                          const std::pair<std::string, unsigned long long> &b) const;
 };
 
+std::vector<std::string> parseHashtag(const std::string &text);
+void parseJSON(std::ifstream &input, 
+               std::unordered_map<std::string, std::pair<std::priority_queue<TikTok>, unsigned long long> > &map, 
+               const std::string &mode);
 void printTopHashtags(std::ofstream &out_str, 
                       const std::vector<std::string> &top10Hashtags,
-                      const std::unordered_map<std::string, std::pair<std::priority_queue<TikTok>, unsigned long long> > &map);
+                      const std::unordered_map<std::string, std::pair<std::priority_queue<TikTok>, 
+                                                                      unsigned long long> > &map);
 void printTopSounds(std::ofstream &out_str, 
                     const std::vector<std::string> &top10Sounds,
-                    const std::unordered_map<std::string, std::pair<std::priority_queue<TikTok>, unsigned long long> > &map);
+                    const std::unordered_map<std::string, std::pair<std::priority_queue<TikTok>, 
+                                                                    unsigned long long> > &map);
 bool operator<(const TikTok &a, const TikTok &b);
 
 #endif
