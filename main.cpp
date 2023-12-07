@@ -41,9 +41,7 @@ int main(int argc, char const *argv[])
                                 compareHashtag> topHashtags;
 
             // Get each hashtag and the data correlated with each hashtag to organize a priority queue with the top hashtags
-            for(const std::pair<std::string, 
-                                std::pair<std::priority_queue<TikTok>, 
-                                                unsigned long long>> &hashtagEntry : map) 
+            for(std::pair<std::string, std::pair<std::priority_queue<TikTok>, unsigned long long>> hashtagEntry : map) 
             {
                 // Format of hashtagData:
                 // {hashtag, {total use, total views}}
@@ -74,9 +72,7 @@ int main(int argc, char const *argv[])
                                 compareSound> topSounds;
 
             // Get each soundID and the data correlated with each soundID to organize a priority queue with the top sounds
-            for(const std::pair<std::string,
-                                std::pair<std::priority_queue<TikTok>, 
-                                                unsigned long long>> &soundEntry : map)
+            for(std::pair<std::string, std::pair<std::priority_queue<TikTok>, unsigned long long>> soundEntry : map)
             {
                 // Format of soundData:
                 // {soundID, total views}
